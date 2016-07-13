@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/java">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="google-collections-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="msutil.jar"/>
+	<classpathentry exported="true" kind="lib" path="msbase.jar"/>
+	<classpathentry exported="true" kind="lib" path="mssqlserver.jar"/>
+	<classpathentry exported="true" kind="lib" path="sqljdbc4.jar"/>
+	<classpathentry exported="true" kind="lib" path="slf4j.log4j12_1.5.2.jar"/>
+	<classpathentry kind="lib" path="slf4j-all-log4j12-1.4.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
