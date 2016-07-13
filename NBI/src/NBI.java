@@ -224,9 +224,9 @@ public class NBI {
 		Arrays.sort(recall);
 		double sum_recall = 0.0;
 		System.out.println(recall[942]);
-		for (int i = 742; i > 443; i--) {
+		for (int i = 260; i < recall.length; i--) {
 			sum_recall += recall[i];
 		}
-		System.out.println(sum_recall / 300.0);
+		System.out.println(sum_recall / (943-260));
 	}
 }
