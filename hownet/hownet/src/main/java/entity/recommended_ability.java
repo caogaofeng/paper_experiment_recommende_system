@@ -32,7 +32,7 @@ public class recommended_ability {
 	public static int Freq(String user){
 		int freq = 0;
 		DBSQLManager dbsm = new DBSQLManager();
-		String sql = "select count(distinct user_id) freq from [MovieLens].[dbo].[u] "
+		String sql = "select count(user_id) freq from [MovieLens].[dbo].[u] "
 				+ "where item_id in (select distinct item_id from [MovieLens].[dbo].[u] "
 				+ "where user_id='" + user + "')";
 		

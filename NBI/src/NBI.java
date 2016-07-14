@@ -62,7 +62,7 @@ public class NBI {
 	}
 
 	/* 读取核心用户集合文件 */
-	public static ArrayList<Integer> ReadDate_CoreUser(String url) {
+	public static ArrayList<Integer> ReadDate_CoreUser(String url, double rate) {
 		ArrayList<Integer> S_coreuser = new ArrayList<Integer>();
 
 		int flag = 1;
@@ -88,7 +88,7 @@ public class NBI {
 
 					// 按百分比读取核心用户
 					flag++;
-					if (flag > 943) {
+					if (flag > (943 * rate)) {
 						break;
 					}
 				}
@@ -118,7 +118,9 @@ public class NBI {
 		Map<Integer, Double> itemhashmap = new HashMap<Integer, Double>();
 		ArrayList<Integer> recommdList = new ArrayList<Integer>();
 		ArrayList<Integer> coreuser = new ArrayList<Integer>();
-		coreuser = ReadDate_CoreUser("./core_user_2_rank_base.txt");
+		double[] novelty = new double[943];
+		 
+		coreuser = ReadDate_CoreUser("./core_user_2_rank_base.txt", 0.8);
 		System.out.println(coreuser.size());
 		for (int p = 1; p <= 943; p++) {
 
@@ -210,6 +212,11 @@ public class NBI {
 				recommdList.add(infoIds.get(i).getKey());
 				// System.out.println(recommdList.get(i));
 			}
+			double sum_degree_rlist = 0;
+			for (int i = 0; i < recommdList.size(); i++) {
+				sum_degree_rlist += itemDegree(recommdList.get(i), user_movie_base);
+			}
+			novelty[p - 1] = sum_degree_rlist / 15.0;
 			// System.out.println(recommdList);
 			for (int i = 0; i < recommdList.size(); i++) {
 				if (itemSet.contains(recommdList.get(i))) {
@@ -221,12 +228,16 @@ public class NBI {
 
 		}
 
-		Arrays.sort(recall);
 		double sum_recall = 0.0;
-		System.out.println(recall[942]);
-		for (int i = 260; i < recall.length; i--) {
+		Arrays.sort(recall);
+		for (int i = 0; i < recall.length; i++) {
 			sum_recall += recall[i];
 		}
-		System.out.println(sum_recall / (943-260));
+		System.out.println("平均Recall:" + sum_recall / 943.0);
+		double sum_novelty = 0.0;
+		for (int i = 0; i < novelty.length; i++) {
+			sum_novelty += novelty[i];
+		}
+		System.out.println("平均novelty：" + sum_novelty / 943.0);
 	}
 }
